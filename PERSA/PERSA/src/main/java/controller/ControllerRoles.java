@@ -1,0 +1,42 @@
+package controller;
+
+import model.Roles;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.web.bind.annotation.*;
+import repository.RolesRepository;
+
+import java.util.List;
+
+@RestController
+@RequestMapping("/roles")
+public class ControllerRoles {
+
+    @Autowired
+    private RolesRepository rolesRepository;
+
+    @GetMapping
+    public List<Roles> getAll(){
+        return rolesRepository.findAll();
+    }
+
+    @GetMapping("/{id}")
+    public  Roles getById(@PathVariable Long id){
+        return rolesRepository.findById(id).orElse(null);
+    }
+
+    @PostMapping
+    public Roles create(@RequestBody Roles roles){
+        return rolesRepository.save(roles);
+    }
+
+    @PutMapping("/{id}")
+    public Roles update(@PathVariable Long id, @RequestBody Roles roles){
+        roles.setId(id);
+        return rolesRepository.save(roles);
+    }
+
+    @DeleteMapping("/{id}")
+    public void delete(@PathVariable Long id){
+        rolesRepository.deleteById(id);
+    }
+}
