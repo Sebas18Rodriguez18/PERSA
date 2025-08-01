@@ -1,0 +1,181 @@
+.main-content {
+  margin-top: 100px;
+  padding: 1rem;
+}
+
+.img-sena-logo{
+  align-self: self-end;
+  
+}
+
+#table_data {
+  width: 100%;
+  overflow-x: auto;
+}
+
+#table_data thead,
+#table_data tbody,
+#table_data td,
+#table_data th {
+  border-bottom: none !important;
+  border-top: none !important;
+  background-color: #f8f9fae4;
+  text-align: center;
+  vertical-align: middle;
+  white-space: nowrap;
+}
+
+#table_data th {
+  text-align: center;
+  vertical-align: middle;
+}
+
+.table-btn {
+  display: inline-block;
+  width: auto;
+  font-size: 1em;
+  margin: 0 0.3em;
+  padding: 6px 12px;
+  border-radius: 6px;
+  white-space: nowrap;
+}
+
+#buttons_DE {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5em;
+}
+
+@media (max-width: 1520px) {
+  #table_data,
+  #table_data thead,
+  #table_data tbody,
+  #table_data th,
+  #table_data td,
+  #table_data tr {
+    display: block;
+    width: 100%;
+  }
+
+  #table_data thead {
+    display: none;
+  }
+
+  #table_data tr {
+    margin-bottom: 1.5rem;
+    border: none;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.07);
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    padding: 1rem 0.5rem;
+  }
+
+  #table_data td {
+    position: relative;
+    padding-left: 44%;
+    padding-top: 0.75em;
+    padding-bottom: 0.75em;
+    text-align: left;
+    white-space: normal;
+    min-height: 2.5em;
+    border: none !important;
+    background: transparent;
+    margin-bottom: 0.5em;
+    border-radius: 0;
+    box-shadow: none;
+    font-size: 1em;
+    color: #222;
+    border-bottom: 1px solid #f1f3f4;
+    z-index: 1;
+  }
+
+  #table_data td:last-child {
+    border-bottom: none;
+  }
+
+  #table_data td:before {
+    content: attr(data-label);
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 42%;
+    min-width: 110px;
+    padding: 0.75em 0.75em 0.75em 0.5em;
+    font-weight: 700;
+    color: #6c757d;
+    background: #f8f9fa;
+    border-right: 2px solid #dee2e6;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    border-radius: 8px 0 0 8px;
+    font-size: 0.98em;
+    box-sizing: border-box;
+    white-space: normal;
+    letter-spacing: 0.01em;
+    z-index: 0;
+  }
+
+  .table-btn {
+    display: block;
+    width: 100%;
+    font-size: 1.15em;
+    margin-bottom: 0.7em;
+    border-radius: 10px;
+    align-items: center;
+    padding: 8px;
+    position: relative;
+    z-index: 2;
+  }
+
+  .table-btn:last-child {
+    margin-bottom: 0;
+  }
+
+  #buttons_DE {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  #table_data td#buttons_DE {
+    display: block !important;
+    text-align: center;
+    padding-left: 0 !important;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 0;
+  }
+
+  #table_data td#buttons_DE .table-btn {
+    width: 100%;
+    margin-bottom: 0.7em;
+  }
+
+  #table_data td#buttons_DE .table-btn:last-child {
+    margin-bottom: 0;
+  }
+
+  #table_data td.no-label-bg:before {
+    background: transparent;
+    border-right: none;
+  }
+
+  #table_data td#buttons_DE:before {
+    content: none !important;
+    background: transparent !important;
+    border-right: none !important;
+    padding: 0 !important;
+    height: 0 !important;
+  }
+}
+
+main {
+  margin-top: 140px !important;
+  /* Ajusta este valor según el alto real del navbar */
+}
