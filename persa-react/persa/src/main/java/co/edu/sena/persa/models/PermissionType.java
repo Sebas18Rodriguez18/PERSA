@@ -8,10 +8,13 @@ import lombok.Setter;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Getter
 @Setter
 @Entity
 @Table(name = "permission_type")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class PermissionType {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

@@ -8,10 +8,13 @@ import lombok.Setter;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Getter
 @Setter
 @Entity
 @Table(name = "career")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Career {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
