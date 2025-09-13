@@ -35,8 +35,13 @@ public class PermissionService {
                 .orElseThrow(() -> new RuntimeException("Permiso no encontrado"));
     }
 
-    public Permission save(Permission permission, Long instructorId, Long apprenticeId,
-                           Long guardId, Long careerId, Long locationId, Long permissionTypeId) {
+    public Permission save(Permission permission,
+                           Long instructorId,
+                           Long apprenticeId,
+                           Long guardId,
+                           Long careerId,
+                           Long locationId,
+                           Long permissionTypeId) {
 
         User instructor = userRepository.findById(instructorId)
                 .orElseThrow(() -> new RuntimeException("Instructor no encontrado"));
@@ -62,6 +67,22 @@ public class PermissionService {
         permission.setPermissionType(permissionType);
 
         return permissionRepository.save(permission);
+    }
+
+    public Permission update(Long id,
+                             Permission permission,
+                             Long instructorId,
+                             Long apprenticeId,
+                             Long guardId,
+                             Long careerId,
+                             Long locationId,
+                             Long permissionTypeId) {
+
+        Permission existing = permissionRepository.findById(id)
+                .orElseThrow(() -> new RuntimeException("Permiso no encontrado"));
+
+        permission.setId(existing.getId());
+        return save(permission, instructorId, apprenticeId, guardId, careerId, locationId, permissionTypeId);
     }
 
     public void delete(Long id) {

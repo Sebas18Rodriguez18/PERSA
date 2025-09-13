@@ -1,17 +1,17 @@
 package co.edu.sena.persa.controllers;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.*;
-
 import co.edu.sena.persa.models.Course;
 import co.edu.sena.persa.service.CourseService;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/course")
 @AllArgsConstructor
 public class CourseController {
+
     private final CourseService courseService;
 
     @GetMapping
@@ -29,8 +29,9 @@ public class CourseController {
         return courseService.save(course, career_id);
     }
 
-    @PutMapping
-    public Course update(@RequestBody Course course, @RequestParam Long career_id){
+    @PutMapping("/{id}")
+    public Course update(@PathVariable Long id, @RequestBody Course course, @RequestParam Long career_id){
+        course.setId(id);
         return courseService.save(course, career_id);
     }
 

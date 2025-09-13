@@ -1,17 +1,17 @@
 package co.edu.sena.persa.controllers;
 
-import java.util.List;
-
-import org.springframework.web.bind.annotation.*;
-
 import co.edu.sena.persa.models.PermissionType;
 import co.edu.sena.persa.service.PermissionTypeService;
 import lombok.AllArgsConstructor;
+import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/types")
 @AllArgsConstructor
 public class permissionTypeController {
+
     private final PermissionTypeService typeService;
 
     @GetMapping
@@ -30,7 +30,8 @@ public class permissionTypeController {
     }
 
     @PutMapping("/{id}")
-    public PermissionType update(@RequestBody PermissionType type, @PathVariable Long id){
+    public PermissionType update(@PathVariable Long id, @RequestBody PermissionType type){
+        type.setId(id);
         return typeService.save(type);
     }
 
