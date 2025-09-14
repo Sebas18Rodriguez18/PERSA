@@ -49,7 +49,7 @@ public class User {
     private String status;
 
     @NotNull
-    @ManyToOne(fetch = FetchType.EAGER, optional = false) // 🔹 cambiado a EAGER
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;

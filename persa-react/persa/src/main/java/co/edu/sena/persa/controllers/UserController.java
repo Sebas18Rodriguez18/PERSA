@@ -15,28 +15,28 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping
-    public List<User> showAll(){
-        return userService.showAll();
+    public List<User> getAll() {
+        return userService.findAll();
     }
 
     @GetMapping("/{id}")
-    public User showById(@PathVariable Long id){
-        return userService.showById(id);
+    public User getById(@PathVariable Long id) {
+        return userService.findById(id)
+                .orElseThrow(() -> new RuntimeException("User not found with id " + id));
     }
 
     @PostMapping
-    public User save(@RequestBody User user, @RequestParam Long role_id){
-        return userService.save(user, role_id);
+    public User create(@RequestBody User user) {
+        return userService.save(user);
     }
 
     @PutMapping("/{id}")
-    public User update(@PathVariable Long id, @RequestBody User user, @RequestParam Long role_id){
-        user.setId(id);
-        return userService.save(user, role_id);
+    public User update(@PathVariable Long id, @RequestBody User user) {
+        return userService.update(id, user);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         userService.delete(id);
     }
 }

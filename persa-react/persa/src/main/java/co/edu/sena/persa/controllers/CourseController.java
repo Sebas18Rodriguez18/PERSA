@@ -15,28 +15,28 @@ public class CourseController {
     private final CourseService courseService;
 
     @GetMapping
-    public List<Course> showAll(){
-        return courseService.showAll();
+    public List<Course> getAll() {
+        return courseService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Course showById(@PathVariable Long id){
-        return courseService.showById(id);
+    public Course getById(@PathVariable Long id) {
+        return courseService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Course not found with id " + id));
     }
 
     @PostMapping
-    public Course save(@RequestBody Course course, @RequestParam Long career_id){
-        return courseService.save(course, career_id);
+    public Course create(@RequestBody Course course) {
+        return courseService.save(course);
     }
 
     @PutMapping("/{id}")
-    public Course update(@PathVariable Long id, @RequestBody Course course, @RequestParam Long career_id){
-        course.setId(id);
-        return courseService.save(course, career_id);
+    public Course update(@PathVariable Long id, @RequestBody Course course) {
+        return courseService.update(id, course);
     }
 
     @DeleteMapping("/{id}")
-    public void delete(@PathVariable Long id){
+    public void delete(@PathVariable Long id) {
         courseService.delete(id);
     }
 }

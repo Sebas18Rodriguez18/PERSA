@@ -16,51 +16,24 @@ public class PermissionController {
     private final PermissionService permissionService;
 
     @GetMapping
-    public List<Permission> showAll() {
-        return permissionService.showAll();
+    public List<Permission> getAll() {
+        return permissionService.findAll();
     }
 
     @GetMapping("/{id}")
-    public Permission showById(@PathVariable Long id) {
-        return permissionService.showById(id);
+    public Permission getById(@PathVariable Long id) {
+        return permissionService.findById(id)
+                .orElseThrow(() -> new RuntimeException("Permission not found with id " + id));
     }
 
     @PostMapping
-    public Permission save(@RequestBody Permission permission,
-                           @RequestParam Long instructor_id,
-                           @RequestParam Long apprentice_id,
-                           @RequestParam Long guard_id,
-                           @RequestParam Long career_id,
-                           @RequestParam Long location_id,
-                           @RequestParam Long permission_type_id) {
-
-        return permissionService.save(permission,
-                instructor_id,
-                apprentice_id,
-                guard_id,
-                career_id,
-                location_id,
-                permission_type_id);
+    public Permission create(@RequestBody Permission permission) {
+        return permissionService.save(permission);
     }
 
     @PutMapping("/{id}")
-    public Permission update(@PathVariable Long id,
-                             @RequestBody Permission permission,
-                             @RequestParam Long instructor_id,
-                             @RequestParam Long apprentice_id,
-                             @RequestParam Long guard_id,
-                             @RequestParam Long career_id,
-                             @RequestParam Long location_id,
-                             @RequestParam Long permission_type_id) {
-
-        return permissionService.update(id,
-                permission,
-                instructor_id,
-                apprentice_id,
-                guard_id,
-                career_id,
-                location_id,
-                permission_type_id);
+    public Permission update(@PathVariable Long id, @RequestBody Permission permission) {
+        return permissionService.update(id, permission);
     }
 
     @DeleteMapping("/{id}")
