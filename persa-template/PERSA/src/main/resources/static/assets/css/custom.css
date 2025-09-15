@@ -4,7 +4,8 @@
 }
 
 .img-sena-logo{
-  align-self: self-end;
+  align-self: self-start;
+  left: 100px;
   
 }
 
@@ -177,5 +178,4 @@
 
 main {
   margin-top: 140px !important;
-  /* Ajusta este valor según el alto real del navbar */
 }
