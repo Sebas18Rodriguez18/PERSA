@@ -4,8 +4,11 @@ import jakarta.persistence.*;
 
 import java.time.Instant;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Table(name = "roles")
+@JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
 public class Role {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -52,5 +55,4 @@ public class Role {
     public void setUpdatedAt(Instant updatedAt) {
         this.updatedAt = updatedAt;
     }
-
 }
