@@ -15,24 +15,38 @@ public class LocationView {
     @Autowired
     private LocationRepository locationRepository;
 
-    @GetMapping("/index")
+    // Listar todas las sedes
+    @GetMapping
     public String showAll(Model model) {
         model.addAttribute("locations", locationRepository.findAll());
         return "location/index";
     }
 
-    // Crear nuevo
-    @GetMapping("/create")
-    public String create(Model model) {
+    @GetMapping("/form")
+    public String crear(Model model) {
         model.addAttribute("location", new Location());
         return "location/form";
     }
 
-    // Editar existente con PathVariable
+    // Editar
     @GetMapping("/form/{id}")
     public String edit(@PathVariable Long id, Model model) {
         Location location = locationRepository.findById(id).orElse(new Location());
         model.addAttribute("location", location);
         return "location/form";
+    }
+
+    // Crear
+    @PostMapping("/save")
+    public String save(@ModelAttribute("location") Location location) {
+        locationRepository.save(location);
+        return "redirect:/location";
+    }
+
+    // Eliminar
+    @PostMapping("/delete/{id}")
+    public String delete(@PathVariable Long id) {
+        locationRepository.deleteById(id);
+        return "redirect:/location";
     }
 }
