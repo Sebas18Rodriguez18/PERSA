@@ -21,8 +21,8 @@ public class CareerView {
     }
 
     @GetMapping("/form")
-    public String crear(Model model) {
-        model.addAttribute("careers", new Career());
+    public String create(Model model) {
+        model.addAttribute("career", new Career());
         return "career/form";
     }
 
