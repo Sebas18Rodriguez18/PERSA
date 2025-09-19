@@ -23,7 +23,7 @@ public class LocationView {
     }
 
     @GetMapping("/form")
-    public String crear(Model model) {
+    public String create(Model model) {
         model.addAttribute("location", new Location());
         return "location/form";
     }

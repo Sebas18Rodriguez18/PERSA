@@ -48,7 +48,7 @@ public class UserController {
     @PutMapping("/{id}")
     public User update(@PathVariable Long id, @RequestBody User user) {
         if (user.getRole() == null || user.getRole().getId() == null) {
-            throw new RuntimeException("El campo 'role.id' es requerido.");
+            throw new RuntimeException("El campo 'role_id' es requerido.");
         }
 
         Role role = roleRepository.findById(user.getRole().getId())

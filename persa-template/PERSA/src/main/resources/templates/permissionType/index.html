@@ -1,35 +1,28 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/base}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
 <body>
     <div layout:fragment="content">
-        <h2>Usuarios</h2>
-        <a th:href="@{/user/form}" class="btn btn-success">Crear</a>
+        <h2>Tipos de permiso</h2>
+        <a th:href="@{/type/form}" class="btn btn-success">Crear</a>
 
         <table class="table table-striped text-center">
             <thead>
                 <tr>
-                    <th>Documento</th>
-                    <th>Nombre completo</th>
-                    <th>Correo</th>
-                    <th>Rol</th>
-                    <th>Estado</th>
-                    <th>Acciones</th>
+                    <th>Id</th>
+                    <th>Nombre</th>
                 </tr>
             </thead>
             <tbody>
-                <tr th:each="user : ${users}">
-                    <td th:text="${user.document}"></td>
-                    <td th:text="${user.fullname}"></td>
-                    <td th:text="${user.email}"></td>
-                    <td th:text="${user.role.name}"></td>
-                    <td th:text="${user.status}"></td>
+                <tr th:each="type : ${types}">
+                    <td th:text="${type.id}"></td>
+                    <td th:text="${type.name}"></td>
                     <td id="buttons_DE" style="border-top: none;">
                         <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-2 w-100">
                             
                             <!-- Botón Editar -->
-                            <a th:href="@{/user/form/{id}(id=${user.id})}" 
+                            <a th:href="@{/type/form/{id}(id=${type.id})}" 
                             class="btn btn-primary btn-circle table-btn w-100 w-md-auto" 
                             title="Editar">
                             <i class="far fa-edit"></i>
@@ -37,14 +30,14 @@
 
 
                             <!-- Botón Eliminar -->
-                            <form th:action="@{/user/delete/{id}(id=${user.id})}"
+                            <form th:action="@{/type/delete/{id}(id=${type.id})}"
                                     method="post"
                                     class="w-100 w-md-auto">
                                 <input type="hidden" name="_method" value="delete"/>
                                 <button type="submit"
                                         class="btn btn-danger btn-circle table-btn w-100 w-md-auto"
                                         title="Eliminar"
-                                        onclick="return confirm('¿Seguro que deseas eliminar este programa?')">
+                                        onclick="return confirm('¿Seguro que deseas eliminar esta sede?')">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
