@@ -21,7 +21,8 @@ public class CareerController {
 
     @GetMapping("/{id}")
     public Career showById(@PathVariable Long id){
-        return careerRepository.findById(id).orElseThrow(() ->new RuntimeException("No se encontró un rol con ese id"));
+        return careerRepository.findById(id)
+                                .orElseThrow(() ->new RuntimeException("No se encontró un programa con ese id"));
     }
 
     @PostMapping

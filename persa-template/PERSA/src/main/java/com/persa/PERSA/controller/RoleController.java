@@ -21,7 +21,8 @@ public class RoleController {
 
     @GetMapping("/{id}")
     public Role showById(@PathVariable Long id){
-        return roleRepository.findById(id).orElseThrow(() ->new RuntimeException("No se encontró un rol con ese id"));
+        return roleRepository.findById(id)
+                                .orElseThrow(() ->new RuntimeException("No se encontró un rol con ese id"));
     }
 
     @PostMapping

@@ -23,7 +23,8 @@ public class PermissionTypeController {
 
     @GetMapping("/{id}")
     public PermissionType showById(@PathVariable Long id){
-        return typeRepository.findById(id).orElseThrow(() ->new RuntimeException("No se encontró un tipo de permiso con ese id"));
+        return typeRepository.findById(id)
+                                .orElseThrow(() ->new RuntimeException("No se encontró un tipo de permiso con ese id"));
     }
 
     @PostMapping

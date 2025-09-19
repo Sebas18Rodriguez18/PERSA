@@ -21,7 +21,8 @@ public class LocationController {
 
     @GetMapping("/{id}")
     public Location showById(@PathVariable Long id){
-        return locationRepository.findById(id).orElseThrow(() ->new RuntimeException("No se encontró una sede con ese id"));
+        return locationRepository.findById(id)
+                                    .orElseThrow(() ->new RuntimeException("No se encontró una sede con ese id"));
     }
 
     @PostMapping
