@@ -99,3 +99,21 @@ document.addEventListener("DOMContentLoaded", () => {
         });
     }
 });
+
+// La función se ejecutará cuando el DOM esté completamente cargado
+document.addEventListener('DOMContentLoaded', (event) => {
+    // Busca todas las tablas que tengan la clase 'dataTable'
+    let tables = document.querySelectorAll('.dataTable');
+
+    tables.forEach(table => {
+        // Asegúrate de que jQuery esté cargado antes de usarlo
+        if (typeof jQuery !== 'undefined' && typeof jQuery.fn.DataTable !== 'undefined') {
+            // Inicializa Datatables en cada tabla encontrada
+            $(table).DataTable({
+                "language": {
+                    "url": "//cdn.datatables.net/plug-ins/1.13.6/i18n/es-ES.json" // Para traducción al español
+                }
+            });
+        }
+    });
+});
