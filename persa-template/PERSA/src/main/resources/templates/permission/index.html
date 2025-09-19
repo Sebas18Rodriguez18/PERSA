@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+        layout:decorate="~{layout/base}">
+<body>
+    <div layout:fragment="content">
+        <h2>Permisos</h2>
+        <a th:href="@{/permission/form}" class="btn btn-success">Crear</a>
+
+        <table class="table table-striped text-center">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Fecha</th>
+                    <th>Hora de inicio</th>
+                    <th>Hora de fin</th>
+                    <th>Hora de salida</th>
+                    <th>Motivo</th>
+                    <th>Sede</th>
+                    <th>Estado</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="permission : ${permissions}">
+                    <td th:text="${permission.id}"></td>
+                    <td th:text="${permission.permissionDate}"></td>
+                    <td th:text="${permission.startTime}"></td>
+                    <td th:text="${permission.endTime}"></td>
+                    <td th:text="${permission.departureTime}"></td>
+                    <td th:text="${permission.reasons}"></td>
+                    <td th:text="${permission.location.name}"></td>
+                    <td th:text="${permission.status}"></td>
+                    <td id="buttons_DE" style="border-top: none;">
+                        <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-2 w-100">
+                            
+                            <a th:href="@{/permission/form/{id}(id=${permission.id})}" 
+                            class="btn btn-primary btn-circle table-btn w-100 w-md-auto" 
+                            title="Editar">
+                            <i class="far fa-edit"></i>
+                            </a>
+
+
+                            <form th:action="@{/permission/delete/{id}(id=${permission.id})}"
+                                    method="post"
+                                    class="w-100 w-md-auto">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button type="submit"
+                                        class="btn btn-danger btn-circle table-btn w-100 w-md-auto"
+                                        title="Eliminar"
+                                        onclick="return confirm('¿Seguro que deseas eliminar este programa?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
