@@ -1,54 +1,45 @@
 package com.persa.PERSA.models;
 
 import jakarta.persistence.*;
-import org.hibernate.annotations.OnDelete;
-import org.hibernate.annotations.OnDeleteAction;
-
-import java.time.Instant;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 @Entity
 @Table(name = "permission")
 public class Permission {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id", nullable = false)
     private Long id;
 
-    @Column(name = "permission_date", nullable = false)
     private LocalDate permissionDate;
-
-    @Column(name = "start_time", nullable = false)
     private LocalTime startTime;
-
-    @Column(name = "end_time", nullable = false)
     private LocalTime endTime;
-
-    @Column(name = "departure_time")
     private LocalTime departureTime;
-
-    @Column(name = "reasons", nullable = false)
     private String reasons;
-
-    @Column(name = "status", nullable = false)
     private String status;
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "career_id", nullable = false)
-    private Career career;
+    // Relaciones
 
-    @ManyToOne(fetch = FetchType.EAGER, optional = false)
-    @OnDelete(action = OnDeleteAction.CASCADE)
-    @JoinColumn(name = "location_id", nullable = false)
+    @ManyToOne
+    @JoinColumn(name = "instructor_id")
+    private User instructor;
+
+    @ManyToOne
+    @JoinColumn(name = "apprentice_id")
+    private User apprentice;
+
+    @ManyToOne
+    @JoinColumn(name = "guard_id")
+    private User guard;
+
+    @ManyToOne
+    @JoinColumn(name = "location_id")
     private Location location;
 
-    @Column(name = "created_at")
-    private Instant createdAt;
-
-    @Column(name = "updated_at")
-    private Instant updatedAt;
+    @ManyToOne
+    @JoinColumn(name = "permission_type_id")
+    private PermissionType permissionType;
 
     public Long getId() {
         return id;
@@ -106,12 +97,28 @@ public class Permission {
         this.status = status;
     }
 
-    public Career getCareer() {
-        return career;
+    public User getInstructor() {
+        return instructor;
     }
 
-    public void setCareer(Career career) {
-        this.career = career;
+    public void setInstructor(User instructor) {
+        this.instructor = instructor;
+    }
+
+    public User getApprentice() {
+        return apprentice;
+    }
+
+    public void setApprentice(User apprentice) {
+        this.apprentice = apprentice;
+    }
+
+    public User getGuard() {
+        return guard;
+    }
+
+    public void setGuard(User guard) {
+        this.guard = guard;
     }
 
     public Location getLocation() {
@@ -122,20 +129,11 @@ public class Permission {
         this.location = location;
     }
 
-    public Instant getCreatedAt() {
-        return createdAt;
+    public PermissionType getPermissionType() {
+        return permissionType;
     }
 
-    public void setCreatedAt(Instant createdAt) {
-        this.createdAt = createdAt;
+    public void setPermissionType(PermissionType permissionType) {
+        this.permissionType = permissionType;
     }
-
-    public Instant getUpdatedAt() {
-        return updatedAt;
-    }
-
-    public void setUpdatedAt(Instant updatedAt) {
-        this.updatedAt = updatedAt;
-    }
-
 }

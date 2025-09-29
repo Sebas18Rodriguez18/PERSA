@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base_reports}"> 
+
+<th:block layout:fragment="report_title">
+    Reporte permisos por rango de fechas
+</th:block>
+
+<th:block layout:fragment="report_info">
+    <p style="font-size: 12px; margin: 0; text-align: left;"><strong>Fecha desde: </strong><span th:text="${#temporals.format(date1, 'dd/MM/yyyy')}"></span></p>
+    <p style="font-size: 12px; margin: 0; text-align: left;"><strong>Fecha hasta: </strong><span th:text="${#temporals.format(date2, 'dd/MM/yyyy')}"></span></p>
+</th:block>
+
+<div layout:fragment="content">
+    <section id="results">
+        <div th:if="${permissions != null and not permissions.empty}">
+            <table id="reportTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Fecha de permiso</th>
+                        <th>Motivo</th>
+                        <th>Aprendiz</th>
+                        <th>Documento</th>
+                        <th>Carrera</th>
+                        <th>Estado</th>
+                        <th>Sede</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="permission : ${permissions}">
+                        <td th:text="${permission.id}"></td>
+                        <td th:text="${#temporals.format(permission.permission_date, 'dd/MM/yyyy')}"></td>
+                        <td th:text="${permission.reasons}"></td>
+                        <td th:text="${permission.apprentice_user.fullname}"></td>
+                        <td th:text="${permission.apprentice_user.document_number}"></td>
+                        <td>
+                            <th:block th:if="${permission.apprentice_user.apprenticeCourses != null and not permission.apprentice_user.apprenticeCourses.empty}">
+                                <th:block th:each="ac : ${permission.apprentice_user.apprenticeCourses}">
+                                    <th:block th:if="${ac.course?.career != null}">
+                                        <span th:text="|${ac.course.career.name} - ${ac.course.number_group}|"></span>
+                                    </th:block>
+                                    <th:block th:unless="${ac.course?.career != null}">
+                                        <span>Curso no asignado</span>
+                                    </th:block>
+                                    <br>
+                                </th:block>
+                            </th:block>
+                            <th:block th:unless="${permission.apprentice_user.apprenticeCourses != null and not permission.apprentice_user.apprenticeCourses.empty}">
+                                No tiene curso asignado
+                            </th:block>
+                        </td>
+                        <td th:text="${#strings.capitalize(#strings.toLowerCase(permission.status))}"></td>
+                        <td th:text="${permission.location?.name ?: 'N/A'}"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        <div th:if="${permissions == null or permissions.empty}">
+            <p><strong>No existen resultados en el reporte</strong></p>
+        </div>
+    </section>
+</div>
+</html>

@@ -1,0 +1,123 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}"> 
+
+<head>
+    <title>Reportes</title>
+</head>
+
+<th:block layout:fragment="header_content">
+    Reportes
+</th:block>
+
+<div class="container-fluid py-4" layout:fragment="content">
+    
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Reporte permisos por rango de fechas</h6>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/reports/epbdr}" th:method="post">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-12 col-md-3">
+                                <label for="date1">Fecha de legalización desde:</label>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <input type="date" name="date1" id="date1" class="form-control" 
+                                       th:value="${param.date1}" required>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <label for="date2">Fecha de legalización hasta:</label>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <input type="date" name="date2" id="date2" class="form-control" 
+                                       th:value="${param.date2}" required>
+                            </div>
+                            <div class="col-12 col-md-2">
+                                <button type="submit" class="btn btn-danger w-100 w-md-auto" title="PDF">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Reporte permisos por aprendiz</h6>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/reports/epba}" th:method="post">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-12 col-md-2">
+                                <label for="apprentice_id">Aprendiz:</label>
+                            </div>
+                            <div class="col-12 col-md-7">
+                                <select name="apprentice_id" id="apprentice_id" class="form-control" required>
+                                    <option value="">Seleccione un aprendiz:</option>
+                                    <option th:each="user : ${users}"
+                                            th:value="${user.id}"
+                                            th:text="${user.fullname}"
+                                            th:selected="${user.id == param.apprentice_id}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <button type="submit" class="btn btn-danger w-100 w-md-auto" title="PDF">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-lg-12 mb-4">
+            <div class="card shadow">
+                <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Reporte permisos por curso</h6>
+                </div>
+                <div class="card-body">
+                    <form th:action="@{/reports/epbc}" th:method="post">
+                        <div class="row g-2 align-items-center">
+                            <div class="col-12 col-md-2">
+                                <label for="course_id">Curso:</label>
+                            </div>
+                            <div class="col-12 col-md-7">
+                                <select name="course_id" id="course_id" class="form-control" required>
+                                    <option value="">Seleccione una ficha:</option>
+                                    <option th:each="course : ${courses}"
+                                            th:value="${course.id}"
+                                            th:text="${course.number_group + ' - ' + course.career.name}"
+                                            th:selected="${course.id == param.course_id}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-12 col-md-3">
+                                <button type="submit" class="btn btn-danger w-100 w-md-auto" title="PDF">
+                                    <i class="fa-solid fa-file-pdf"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+
+<th:block layout:fragment="scripts">
+</th:block>
+</html>

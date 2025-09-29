@@ -37,6 +37,11 @@ public class User {
     @JoinColumn(name = "role_id", nullable = false)
     private Role role;
 
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "course_id")
+    private Course course;
+
+
     @Column(name = "remember_token", length = 100)
     private String rememberToken;
 
@@ -126,4 +131,11 @@ public class User {
         this.updatedAt = updatedAt;
     }
 
+    public Course getCourse() {
+        return course;
+    }
+
+    public void setCourse(Course course) {
+        this.course = course;
+    }
 }

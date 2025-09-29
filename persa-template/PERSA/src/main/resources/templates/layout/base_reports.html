@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="es" xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout">
+<head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" th:href="@{/css/report.css}">
+    <title layout:title-template="Reporte - %s">Reporte Base</title> 
+    <style>
+        #reportTable { border-collapse: collapse; width: 100%; font-size: 11px; }
+        #reportTable th, #reportTable td { border: 1px solid #000; padding: 5px; text-align: left; }
+        #reportTable th { background-color: #f2f2f2; font-weight: bold; text-align: center; }
+    </style>
+</head>
+<body>
+    
+    <section id="header">
+        <table width="100%" style="border-collapse:collapse; border: 1px solid">
+            <tr>
+                <th width="20%">
+                    <div style="text-align: center">
+                        <img th:src="@{/img/persa-logo.png}" alt="logo" style="max-height: 100px">
+                    </div>
+                </th>
+                <th width="80%">
+                    <p style="text-align: center; font-size: 16px; margin: 0; padding: 10px;">
+                        <th:block layout:fragment="report_title"></th:block>
+                    </p> 
+                </th> 
+            </tr>
+        </table>
+    </section>
+
+    <section id="infoReport" style="margin-top: 5px;">
+        <p style="font-size: 12px; margin: 0; text-align: right;">
+            <strong>Fecha de Generación: </strong>
+            <span th:text="${#temporals.format(#temporals.createNow(), 'yyyy-MM-dd (HH:mm:ss)')}"></span>
+        </p>
+        <th:block layout:fragment="report_info"></th:block>
+    </section>
+
+    <hr style="margin-top: 5px; margin-bottom: 10px;">
+
+    <section id="reportContent" style="margin-top: 15px;">
+        <div layout:fragment="content">
+            </div>
+    </section>
+
+    <footer id="version_text" style="position: fixed; bottom: 0; width: 100%; text-align: center; font-size: 10px;">
+        <p style="margin: 5px 0;">Generado por Persa 1.0</p>
+    </footer>
+
+</body>
+</html>
