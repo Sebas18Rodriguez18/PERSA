@@ -64,13 +64,11 @@ public class ReportsView {
 
     private void addHeader(Document document, String title, String subtitle) throws DocumentException {
         try {
-            // Logo SENA
             Image logoSena = Image.getInstance(new ClassPathResource("static/assets/img/sena-logo.png").getURL());
             logoSena.scaleAbsolute(70, 70);
             logoSena.setAbsolutePosition(40, 750);
             document.add(logoSena);
 
-            // Logo PERSA
             Image logoPersa = Image.getInstance(new ClassPathResource("static/assets/img/persa-logo.png").getURL());
             logoPersa.scaleAbsolute(200, 60);
             logoPersa.setAlignment(Image.ALIGN_CENTER);

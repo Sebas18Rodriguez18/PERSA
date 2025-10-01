@@ -15,4 +15,8 @@ public interface UsersRepository extends JpaRepository<User, Long> {
 
     @Query("SELECT u FROM User u WHERE u.course.id = :courseId AND u.role.id = 3")
     List<User> findApprenticesByCourseId(@Param("courseId") Long courseId);
+
+    List<User> findByRole_Name(String roleName);
+
+    List<User> findByRole_NameIgnoreCase(String roleName);
 }

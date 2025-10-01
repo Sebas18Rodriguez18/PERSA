@@ -1,13 +1,46 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org"
-        xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-        layout:decorate="~{layout/base}">
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
 <body>
-    <div layout:fragment="content">
-        <h2>Usuarios</h2>
-        <a th:href="@{/user/form}" class="btn btn-success">Crear</a>
+<div layout:fragment="content">
 
-        <table class="table table-striped text-center" id="table_data">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+        <h2 class="mb-0">Usuarios</h2>
+        <a th:href="@{/user/form}" class="btn btn-success">
+            <i class="fas fa-plus"></i> Crear
+        </a>
+    </div>
+
+    <div class="mb-3 d-flex gap-2">
+        <button id="exportExcelBtn" class="btn btn-success" 
+                onclick="window.location.href='/user/export/excel'">
+            <i class="fas fa-file-excel"></i> Excel
+        </button>
+        <button id="exportPdfBtn" class="btn btn-danger" 
+                onclick="window.location.href='/user/export/pdf'">
+            <i class="fas fa-file-pdf"></i> PDF
+        </button>
+    </div>
+    
+    <div class="row g-2 mb-3">
+        <div class="col-6 col-md-auto d-grid">
+            <a th:href="@{/user}" class="btn btn-outline-primary w-100">Todos</a>
+        </div>
+        <div class="col-6 col-md-auto d-grid">
+            <a th:href="@{/user/apprentices}" class="btn btn-outline-success w-100">Aprendices</a>
+        </div>
+        <div class="col-6 col-md-auto d-grid">
+            <a th:href="@{/user/instructors}" class="btn btn-outline-secondary w-100">Instructores</a>
+        </div>
+        <div class="col-6 col-md-auto d-grid">
+            <a th:href="@{/user/guards}" class="btn btn-outline-warning w-100">Guardas</a>
+        </div>
+    </div>
+
+
+    <div class="table-responsive">
+        <table id="table_data" class="table table-striped text-center">
             <thead>
                 <tr>
                     <th>Documento</th>
@@ -23,28 +56,25 @@
                     <td th:text="${user.document}"></td>
                     <td th:text="${user.fullname}"></td>
                     <td th:text="${user.email}"></td>
-                    <td th:text="${user.role.name}"></td>
+                    <td th:text="${user.role != null ? user.role.name : 'Sin rol'}"></td>
                     <td th:text="${user.status}"></td>
-                    <td id="buttons_DE" style="border-top: none;">
+                    <td>
                         <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-2 w-100">
                             
-                            <!-- Botón Editar -->
                             <a th:href="@{/user/form/{id}(id=${user.id})}" 
-                            class="btn btn-primary btn-circle table-btn w-100 w-md-auto" 
-                            title="Editar">
-                            <i class="far fa-edit"></i>
+                               class="btn btn-primary btn-circle table-btn w-100 w-md-auto" 
+                               title="Editar">
+                                <i class="far fa-edit"></i>
                             </a>
 
-
-                            <!-- Botón Eliminar -->
                             <form th:action="@{/user/delete/{id}(id=${user.id})}"
-                                    method="post"
-                                    class="w-100 w-md-auto">
+                                  method="post"
+                                  class="w-100 w-md-auto">
                                 <input type="hidden" name="_method" value="delete"/>
                                 <button type="submit"
                                         class="btn btn-danger btn-circle table-btn w-100 w-md-auto"
                                         title="Eliminar"
-                                        onclick="return confirm('¿Seguro que deseas eliminar este programa?')">
+                                        onclick="return confirm('¿Seguro que deseas eliminar este usuario?')">
                                     <i class="fas fa-trash"></i>
                                 </button>
                             </form>
@@ -54,5 +84,56 @@
             </tbody>
         </table>
     </div>
+</div>
+
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/dataTables.buttons.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+<script src="https://cdn.datatables.net/buttons/2.2.3/js/buttons.html5.min.js"></script>
+
+<script>
+$(document).ready(function() {
+    const table = $('#table_data').DataTable({
+        pageLength: 10,
+        lengthChange: false,
+        language: {
+            paginate: { previous: "Anterior", next: "Siguiente" },
+            search: "Buscar:",
+            info: "Mostrando _START_ a _END_ de _TOTAL_ registros",
+            infoEmpty: "No hay registros para mostrar",
+            emptyTable: "No existen registros"
+        },
+        dom: 'frtipB',
+        buttons: [
+            {
+                extend: 'excelHtml5',
+                className: 'd-none',
+                title: 'Reporte de Usuarios',
+                exportOptions: { columns: ':not(:last-child)' }
+            },
+            {
+                extend: 'pdfHtml5',
+                className: 'd-none',
+                title: 'Reporte de Usuarios',
+                orientation: 'landscape',
+                exportOptions: { columns: ':not(:last-child)' }
+            }
+        ]
+    });
+
+    $('#exportExcelBtn').on('click', function(e) {
+        e.preventDefault();
+        table.button('.buttons-excel').trigger();
+    });
+
+    $('#exportPdfBtn').on('click', function(e) {
+        e.preventDefault();
+        table.button('.buttons-pdf').trigger();
+    });
+});
+</script>
 </body>
 </html>
