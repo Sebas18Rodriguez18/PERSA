@@ -26,7 +26,7 @@ public class Course {
     @Column(name = "trimester", nullable = false, length = 50)
     private String trimester;
 
-    @Column(name = "year", nullable = false)
+    @Column(name = "course_year", nullable = false)
     private Integer year;
 
     @Column(name = "status", nullable = false, length = 50)
