@@ -26,7 +26,7 @@ CREATE TABLE IF NOT EXISTS `apprentice_course` (
   `course_id` bigint unsigned NOT NULL,
   `created_at` timestamp NULL DEFAULT NULL,
   `updated_at` timestamp NULL DEFAULT NULL,
-  `apprentice_id` bigint NOT NULL,
+  `apprentice_id` bigint unsigned DEFAULT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `apprentice_course_user_id_course_id_unique` (`user_id`,`course_id`),
   KEY `apprentice_course_course_id_foreign` (`course_id`),
@@ -297,14 +297,14 @@ INSERT INTO `users` (`id`, `document`, `fullname`, `email`, `password`, `status`
 	(5, 345, 'Bethany Nader', 'xdietrich@example.org', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'ACTIVO', 2, NULL, 'kS9y5w8DjZ', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
 	(6, 457, 'Cecelia Reinger', 'boris.miller@example.com', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'ACTIVO', 2, NULL, 'uT6fNT7SPq', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
 	(7, 234, 'Raphael Heller', 'lebsack.elton@example.org', '$2y$12$Wh2bHaAu2VCjPgZgEwS0TO.bZB/GUi4BuyYpSJaq2RiJzpsK0cus2', 'ACTIVO', 2, NULL, 'RP75X9AeTg', '2025-06-26 18:11:51', '2025-08-03 00:08:35'),
-	(9, 1235, 'Mrs. Ardella Funk MD', 'qoconnell@example.com', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'ACTIVO', 3, NULL, 'eZNPnclQtX', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
-	(10, 954, 'Chester Miller', 'terry.patricia@example.com', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'ACTIVO', 3, NULL, 'eCjkQvBQcMnRtJ54LehP3L5TWbV3d1ogD35d15KBk5FXSjpF2ACdosOFu2Cy', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
-	(11, 4567, 'Laurie Bogan', 'max.fritsch@example.org', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'INACTIVO', 3, NULL, 'XaeoLTUV1J', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
-	(12, 22345, 'Ms. Caroline Becker Sr.', 'estella.heathcote@example.net', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'ACTIVO', 3, NULL, 'vxVgKvXzZc', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
+	(9, 1235, 'Mrs. Ardella Funk MD', 'qoconnell@example.com', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'ACTIVO', 3, 1, 'eZNPnclQtX', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
+	(10, 954, 'Chester Miller', 'terry.patricia@example.com', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'ACTIVO', 3, 1, 'eCjkQvBQcMnRtJ54LehP3L5TWbV3d1ogD35d15KBk5FXSjpF2ACdosOFu2Cy', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
+	(11, 4567, 'Laurie Bogan', 'max.fritsch@example.org', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'INACTIVO', 3, 2, 'XaeoLTUV1J', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
+	(12, 22345, 'Ms. Caroline Becker Sr.', 'estella.heathcote@example.net', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'ACTIVO', 3, 2, 'vxVgKvXzZc', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
 	(13, 2312, 'Dr. Allen Cruickshank III', 'adrain97@example.com', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'ACTIVO', 4, NULL, 'KD7MO6DBJ9', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
 	(14, 324, 'Mr. Jarod Anderson PhD', 'rau.rashad@example.com', '$2y$12$RPUi1mVtauI503zI7p.2LulMC70AgRqcOzU9uKYjWPAT2nzVi1Sfm', 'INACTIVO', 4, NULL, 'zALvAeKTiP', '2025-06-26 18:11:51', '2025-06-26 18:11:51'),
-	(15, 1117012959, 'LINA VANESSA SALCEDO CUELLAR', 'nosemk9@gmail.com', '$2y$12$RDLMtGSSs2H7hqqODDyT3u4j6s9fej205Agk9knRzat/qc9OSC9Zm', 'ACTIVO', 3, NULL, NULL, '2025-08-14 19:23:38', '2025-08-23 06:36:44'),
-	(16, 1107843290, 'JUAN SEBASTIAN RODRIGUEZ CRUZ', 'sr1290853@gmail.com', '$2y$12$Bq8LBXIuAkj6d9IZKAz91u4KfG/970E2cBZC6BeLFDjMwdCsZqp4a', 'ACTIVO', 3, NULL, NULL, '2025-08-14 21:37:11', '2025-08-14 21:37:11');
+	(15, 1117012959, 'LINA VANESSA SALCEDO CUELLAR', 'nosemk9@gmail.com', '$2y$12$RDLMtGSSs2H7hqqODDyT3u4j6s9fej205Agk9knRzat/qc9OSC9Zm', 'ACTIVO', 3, 6, NULL, '2025-08-14 19:23:38', '2025-08-23 06:36:44'),
+	(16, 1107843290, 'JUAN SEBASTIAN RODRIGUEZ CRUZ', 'sr1290853@gmail.com', '$2y$12$Bq8LBXIuAkj6d9IZKAz91u4KfG/970E2cBZC6BeLFDjMwdCsZqp4a', 'ACTIVO', 3, 6, NULL, '2025-08-14 21:37:11', '2025-08-14 21:37:11');
 
 /*!40103 SET TIME_ZONE=IFNULL(@OLD_TIME_ZONE, 'system') */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
