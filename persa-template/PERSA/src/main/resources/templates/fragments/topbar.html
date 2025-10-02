@@ -1,0 +1,19 @@
+<nav th:fragment="topbar" class="navbar navbar-main navbar-expand-lg shadow-none custom-navbar w-100 fixed-top"
+     id="navbarBlur" data-scroll="false" style="background-color: #00304D; z-index: 1000;">
+     <div class="container-fluid py-2 px-2">
+      <a aria-label="SENA" th:href="@{https://www.sena.edu.co}" class="navbar-brand font-weight-bolder text-white ms-12" target="_blank">
+          <img th:src="@{/assets/img/sena-logo.png}" alt="logo-sena" width="70" height="70" class="img-sena-logo">
+      </a>
+        <ul class="navbar-nav justify-content-end ms-auto">
+            <li class="nav-item d-xl-none ps-3 d-flex align-items-center">
+                <a href="#" class="nav-link text-white p-0" id="iconNavbarSidenav">
+                    <div class="sidenav-toggler-inner">
+                        <i class="sidenav-toggler-line bg-white"></i>
+                        <i class="sidenav-toggler-line bg-white"></i>
+                        <i class="sidenav-toggler-line bg-white"></i>
+                    </div>
+                </a>
+            </li>
+        </ul>
+    </div>
+</nav>

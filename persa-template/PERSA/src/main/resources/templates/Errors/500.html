@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<head>
+  <title>PERSA - Error 500</title>
+  <link rel="stylesheet" th:href="@{/assets/css/argon-dashboard.css}">
+  <link rel="stylesheet" th:href="@{/assets/css/custom.css}">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css"/>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <script th:src="@{../assets/js/general.js}" defer></script>
+</head>
+<body>
+  <div layout:fragment="content">
+    <div class="content-wrapper error-fullscreen text-center">
+      <!-- Imagen del error -->
+      <img src="/assets/img/Error500.png" alt="Error 404" class="error-logo animate__animated animate__fadeInDown">
+
+      <!-- Botón opcional pa’ volver al inicio -->
+      <div class="mt-4">
+        <a th:href="@{/}" class="btn btn-primary">Volver al Inicio</a>
+      </div>
+    </div>
+  </div>
+</body>
+</html>

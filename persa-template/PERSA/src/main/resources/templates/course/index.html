@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<body>
+<div layout:fragment="content">
+    <h2>Grupos</h2>
+    <a th:href="@{/course/form}" class="btn btn-success">Crear</a>
+
+    <table class="table table-striped text-center" id="table_data">
+        <thead>
+        <tr>
+            <th>Número de ficha</th>
+            <th>Jornada</th>
+            <th>Trimestre</th>
+            <th>Año de ingreso</th>
+            <th>Programa</th>
+            <th>Estado</th>
+            <th>Acciones</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="course : ${courses}">
+            <td th:text="${course.numberGroup}"></td>
+            <td th:text="${course.shift}"></td>
+            <td th:text="${course.trimester}"></td>
+            <td th:text="${course.year}"></td>
+            <td th:text="${course.career.name}"></td>
+            <td th:text="${course.status}"></td>
+            <td style="border-top: none;">
+                <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-2 w-100">
+
+                    <!-- Botón Editar -->
+                    <a th:href="@{/course/form/{id}(id=${course.id})}"
+                       class="btn btn-primary btn-circle table-btn w-100 w-md-auto"
+                       title="Editar">
+                        <i class="far fa-edit"></i>
+                    </a>
+
+                    <!-- Botón Eliminar -->
+                    <form th:action="@{/course/delete/{id}(id=${course.id})}"
+                          method="post"
+                          class="w-100 w-md-auto">
+                        <input type="hidden" name="_method" value="delete"/>
+                        <button type="submit"
+                                class="btn btn-danger btn-circle table-btn w-100 w-md-auto"
+                                title="Eliminar"
+                                onclick="return confirm('¿Seguro que deseas eliminar este curso?')">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </form>
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+</html>

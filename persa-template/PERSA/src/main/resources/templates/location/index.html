@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorate="~{layout/base}">
+<body>
+    <div layout:fragment="content">
+        <h2>Sedes</h2>
+        <a th:href="@{/location/form}" class="btn btn-success">Crear</a>
+
+        <table class="table table-striped text-center" id="table_data">
+            <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Nombre</th>
+                    <th>Dirección</th>
+                    <th>Acciones</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="location : ${locations}">
+                    <td th:text="${location.id}"></td>
+                    <td th:text="${location.name}"></td>
+                    <td th:text="${location.address}"></td>
+                    <td id="buttons_DE" style="border-top: none;">
+                        <div class="d-flex flex-column flex-md-row justify-content-center align-items-center gap-2 w-100">
+                            
+                            <!-- Botón Editar -->
+                            <a th:href="@{/location/form/{id}(id=${location.id})}" 
+                            class="btn btn-primary btn-circle table-btn w-100 w-md-auto" 
+                            title="Editar">
+                            <i class="far fa-edit"></i>
+                            </a>
+
+
+                            <!-- Botón Eliminar -->
+                            <form th:action="@{/location/delete/{id}(id=${location.id})}"
+                                    method="post"
+                                    class="w-100 w-md-auto">
+                                <input type="hidden" name="_method" value="delete"/>
+                                <button type="submit"
+                                        class="btn btn-danger btn-circle table-btn w-100 w-md-auto"
+                                        title="Eliminar"
+                                        onclick="return confirm('¿Seguro que deseas eliminar esta sede?')">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </form>
+                        </div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
