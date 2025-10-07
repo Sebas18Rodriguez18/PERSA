@@ -15,6 +15,7 @@ import com.persa.PERSA.repository.PermissionRepository;
 import com.persa.PERSA.repository.LocationRepository;
 import com.persa.PERSA.repository.PermissionTypeRepository;
 import com.persa.PERSA.repository.UsersRepository;
+import com.persa.PERSA.repository.CareerRepository;
 
 @Controller
 @RequestMapping("/permission")
@@ -31,6 +32,9 @@ public class PermissionView {
 
     @Autowired
     private UsersRepository userRepository;
+    
+    @Autowired
+    private CareerRepository careerRepository;
 
     @GetMapping
     public String showAll(Model model) {
@@ -43,6 +47,7 @@ public class PermissionView {
         model.addAttribute("permission", new Permission());
         model.addAttribute("locations", locationRepository.findAll());
         model.addAttribute("permissionTypes", permissionTypeRepository.findAll());
+        model.addAttribute("careers", careerRepository.findAll());
         return "permission/form";
     }
 

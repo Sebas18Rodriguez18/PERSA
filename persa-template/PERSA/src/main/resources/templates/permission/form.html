@@ -32,7 +32,7 @@
 
                 <div class="col-lg-6 mb-5">
                     <label for="career">Programa</label>
-                    <select th:field="*{career.id}" class="form-control">
+                    <select th:field="*{apprentice.course.career.id}" class="form-control">
                         <option value="" disabled selected>Seleccione un programa</option>
                         <option th:each="career : ${careers}"
                                 th:value="${career.id}"
