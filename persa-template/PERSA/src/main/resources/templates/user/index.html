@@ -13,12 +13,12 @@
     </div>
 
     <div class="mb-3 d-flex gap-2">
-        <button id="exportExcelBtn" class="btn btn-success" 
-                onclick="window.location.href='/user/export/excel'">
+        <button id="exportExcelBtn" class="btn btn-success"
+                th:onclick="|window.location.href='@{/user/export/excel(role=${currentRole})}'|">
             <i class="fas fa-file-excel"></i> Excel
         </button>
-        <button id="exportPdfBtn" class="btn btn-danger" 
-                onclick="window.location.href='/user/export/pdf'">
+        <button id="exportPdfBtn" class="btn btn-danger"
+                th:onclick="|window.location.href='@{/user/export/pdf(role=${currentRole})}'|">
             <i class="fas fa-file-pdf"></i> PDF
         </button>
     </div>

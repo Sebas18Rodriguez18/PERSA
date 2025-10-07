@@ -42,24 +42,28 @@ public class UserView {
     @GetMapping
     public String showAll(Model model){
         model.addAttribute("users", usersRepository.findAll());
+        model.addAttribute("currentRole", "");
         return "user/index";
     }
 
     @GetMapping("/apprentices")
     public String showApprentices(Model model) {
         model.addAttribute("users", usersRepository.findByRole_NameIgnoreCase("APRENDIZ"));
+        model.addAttribute("currentRole", "APRENDIZ");
         return "user/index";
     }
 
     @GetMapping("/instructors")
     public String showInstructors(Model model) {
         model.addAttribute("users", usersRepository.findByRole_NameIgnoreCase("INSTRUCTOR"));
+        model.addAttribute("currentRole", "INSTRUCTOR");
         return "user/index";
     }
 
     @GetMapping("/guards")
     public String showGuards(Model model) {
         model.addAttribute("users", usersRepository.findByRole_NameIgnoreCase("GUARDIA"));
+        model.addAttribute("currentRole", "GUARDIA");
         return "user/index";
     }
 
