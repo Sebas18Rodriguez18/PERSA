@@ -1,6 +1,7 @@
 package com.persa.PERSA.repository;
 
 import java.util.List;
+import java.util.Optional;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -19,4 +20,7 @@ public interface UsersRepository extends JpaRepository<User, Long> {
     List<User> findByRole_Name(String roleName);
 
     List<User> findByRole_NameIgnoreCase(String roleName);
+
+    Optional<User> findByEmail(String email);
+
 }
